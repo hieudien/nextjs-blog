@@ -4,6 +4,7 @@ import utilStyles from '../styles/utils.module.css'
 import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
 import Date from '../components/date'
+import { Container } from '@chakra-ui/react'
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData()
@@ -16,6 +17,7 @@ export async function getStaticProps() {
 
 export default function Home({ allPostsData }) {
   return (
+    <Container maxWidth="container.xl" p={2}>
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
@@ -23,7 +25,8 @@ export default function Home({ allPostsData }) {
       <section className={utilStyles.headingMd}>
         <p>Hello, I'm <b>Giang</b>. I'm cute</p>
       </section>
-      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+          <Link href={'chakra-form'}><a>Chakra Form</a></Link>
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
@@ -39,6 +42,7 @@ export default function Home({ allPostsData }) {
           ))}
         </ul>
       </section>
-    </Layout>
+      </Layout>
+    </Container>
   )
 }
