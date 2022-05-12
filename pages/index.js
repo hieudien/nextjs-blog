@@ -4,7 +4,12 @@ import utilStyles from '../styles/utils.module.css'
 import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
 import Date from '../components/date'
-import { Container } from '@chakra-ui/react'
+import {
+  Container,
+  ListItem,
+  UnorderedList,
+  VStack,
+} from '@chakra-ui/react'
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData()
@@ -22,26 +27,55 @@ export default function Home({ allPostsData }) {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section className={utilStyles.headingMd}>
+      {/* <section className={utilStyles.headingMd}>
         <p>Hello, I'm <b>Giang</b>. I'm cute</p>
-      </section>
-        <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-          <Link href={'chakra-form'}><a>Chakra Form</a></Link>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>
-                <a>{title}</a>
+      </section> */}
+        <VStack align='stretch'>
+          <h2 className={utilStyles.headingLg}>Sites:</h2>
+          <UnorderedList>
+            <ListItem>
+              <Link href={`https://beshort.vercel.app/`}>
+                <a>beshort</a>
               </Link>
               <br />
               <small className={utilStyles.lightText}>
-                <Date dateString={date} />
+                The simple URL shorten tool
               </small>
-            </li>
-          ))}
-        </ul>
-      </section>
+            </ListItem>
+            <ListItem>
+              <Link href={`https://seo-htmll.vercel.app/`}>
+                <a>SEO HTML</a>
+              </Link>
+              <br />
+              <small className={utilStyles.lightText}>
+                WYSIWYG editer with HTML exportable
+              </small>
+            </ListItem>
+            <ListItem>
+              <Link href={'chakra-form'}><a>demo Chakra Form</a></Link>
+              <br />
+              <small className={utilStyles.lightText}>
+                A simple demo of chakra form
+              </small>
+            </ListItem>
+          </UnorderedList>
+        </VStack>
+        <VStack align='stretch'>
+          <h2 className={utilStyles.headingLg}>Blogs:</h2>
+          <UnorderedList>
+            {allPostsData.map(({ id, date, title }) => (
+              <ListItem className={utilStyles.listItem} key={id}>
+                <Link href={`/posts/${id}`}>
+                  <a>{title}</a>
+                </Link>
+                <br />
+                <small className={utilStyles.lightText}>
+                  <Date dateString={date} />
+                </small>
+              </ListItem>
+            ))}
+          </UnorderedList>
+        </VStack>
       </Layout>
     </Container>
   )
